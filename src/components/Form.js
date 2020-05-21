@@ -1,4 +1,5 @@
 import React, { Fragment, useState } from "react";
+import { v4 as uuidv4 } from 'uuid';
 
 const Form = () => {
 
@@ -36,9 +37,11 @@ const Form = () => {
             updateError(true);
             return; //para que no continue ejecutando el codigo 
         }
-
+        //delete the previous message
+        updateError(false);
 
         //assign an id
+        quote.id = uuidv4();
 
         //create a list
 
