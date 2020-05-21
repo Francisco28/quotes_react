@@ -1,64 +1,72 @@
 import React, { Fragment, useState } from "react";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 
 const Form = ({ createQuote }) => {
+  //create "State" of quotes
+  const [quote, updateQuote] = useState({
+    pet: "",
+    owner: "",
+    date: "",
+    hour: "",
+    symptoms: "",
+  });
 
-    //create "State" of quotes
-    const [quote, updateQuote] = useState({
-        pet: '',
-        owner: '',
-        date: '',
-        hour: '',
-        symptoms: ''
+  const [error, updateError] = useState(false);
+
+  //function that execute every that an user write in a input
+  const updateState = (e) => {
+    updateQuote({
+      ...quote,
+      [e.target.name]: e.target.value,
     });
+  };
 
-    const [error, updateError] = useState(false);
+  //extract the values
+  const { pet, owner, date, hour, symptoms } = quote;
 
+  //when the user press button "Add Quotes"
+  const submitQuote = (e) => {
+    e.preventDefault(); //para prevenir la accion por default
 
-    //function that execute every that an user write in a input
-    const updateState = e => {
-         updateQuote({
-             ...quote,
-             [e.target.name]: e.target.value
-         })
+    //validate
+    if (
+      pet.trim() === "" ||
+      owner.trim() === "" ||
+      date.trim() === "" ||
+      hour.trim() === "" ||
+      symptoms.trim() === ""
+    ) {
+      updateError(true);
+      return; //para que no continue ejecutando el codigo
     }
+    //delete the previous message
+    updateError(false);
 
-    //extract the values
-    const { pet, owner, date, hour, symptoms } = quote;
+    //assign an id
+    quote.id = uuidv4();
 
-    //when the user press button "Add Quotes"
-    const submitQuote = e => {
-        e.preventDefault(); //para prevenir la accion por default
-        
+    //create a list
+    createQuote(quote);
 
-        //validate
-        if (pet.trim() === '' || owner.trim() === '' || date.trim() === '' || hour.trim() === '' ||
-            symptoms.trim() === '' ) {
-            updateError(true);
-            return; //para que no continue ejecutando el codigo 
-        }
-        //delete the previous message
-        updateError(false);
-
-        //assign an id
-        quote.id = uuidv4();
-
-        //create a list
-        createQuote(quote);
-
-        //restart the form
-    }
+    //restart the form
+    updateQuote({
+      pet: "",
+      owner: "",
+      date: "",
+      hour: "",
+      symptoms: "",
+    });
+  };
 
   return (
     <Fragment>
       <h2>Create quote</h2>
-       
-      { error ? <p className="alert-error">All the fields are mandatory</p>     
-        : null }
 
-      <form 
-        onSubmit = {submitQuote}    
-      >
+      {error ? (
+        <p className="alert-error">All the fields are mandatory</p>
+      ) : null}
+
+      <form onSubmit={submitQuote}>
         <label>Pet's name</label>
         <input
           type="text"
@@ -80,35 +88,34 @@ const Form = ({ createQuote }) => {
         />
 
         <label>Date</label>
-        <input 
-            type="date" 
-            name="date" 
-            className="u-full-width" 
-            onChange={updateState}
-            value={date}
+        <input
+          type="date"
+          name="date"
+          className="u-full-width"
+          onChange={updateState}
+          value={date}
         />
 
         <label>Time</label>
-        <input 
-            type="time" 
-            name="hour" 
-            className="u-full-width" 
-            onChange={updateState}
-            value={hour}
+        <input
+          type="time"
+          name="hour"
+          className="u-full-width"
+          onChange={updateState}
+          value={hour}
         />
 
         <label>Symptoms</label>
         <textarea
-            className="u-full-width"
-            name="symptoms"
-            onChange={updateState}
-            value={symptoms}
+          className="u-full-width"
+          name="symptoms"
+          onChange={updateState}
+          value={symptoms}
         ></textarea>
 
-        <button
-            type="submit"
-            className="u-full-width button-primary"
-        >Add Quote</button>
+        <button type="submit" className="u-full-width button-primary">
+          Add Quote
+        </button>
       </form>
     </Fragment>
   );
