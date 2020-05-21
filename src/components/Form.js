@@ -12,9 +12,16 @@ const Form = () => {
     });
 
     //function that execute every that an user write in a input
-    const updateState = () => {
-        console.log('writing...');
+    const updateState = e => {
+         updateQuote({
+             ...quote,
+             [e.target.name]: e.target.value
+         })
     }
+
+    //extract the values
+    const { pet, owner, date, hour, symptoms } = quote;
+
 
   return (
     <Fragment>
@@ -28,6 +35,7 @@ const Form = () => {
           className="u-full-width"
           placeholder="Pet's name"
           onChange={updateState}
+          value={pet}
         />
 
         <label>Owner's name</label>
@@ -37,6 +45,7 @@ const Form = () => {
           className="u-full-width"
           placeholder="Owner's name"
           onChange={updateState}
+          value={owner}
         />
 
         <label>Date</label>
@@ -45,6 +54,7 @@ const Form = () => {
             name="date" 
             className="u-full-width" 
             onChange={updateState}
+            value={date}
         />
 
         <label>Time</label>
@@ -53,6 +63,7 @@ const Form = () => {
             name="hour" 
             className="u-full-width" 
             onChange={updateState}
+            value={hour}
         />
 
         <label>Symptoms</label>
@@ -60,6 +71,7 @@ const Form = () => {
             className="u-full-width"
             name="symptoms"
             onChange={updateState}
+            value={symptoms}
         ></textarea>
 
         <button
