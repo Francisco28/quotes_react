@@ -1,7 +1,7 @@
 import React, { Fragment, useState } from "react";
 import { v4 as uuidv4 } from 'uuid';
 
-const Form = () => {
+const Form = ({ createQuote }) => {
 
     //create "State" of quotes
     const [quote, updateQuote] = useState({
@@ -44,6 +44,7 @@ const Form = () => {
         quote.id = uuidv4();
 
         //create a list
+        createQuote(quote);
 
         //restart the form
     }
