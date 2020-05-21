@@ -11,6 +11,9 @@ const Form = () => {
         symptoms: ''
     });
 
+    const [error, updateError] = useState(false);
+
+
     //function that execute every that an user write in a input
     const updateState = e => {
          updateQuote({
@@ -22,23 +25,33 @@ const Form = () => {
     //extract the values
     const { pet, owner, date, hour, symptoms } = quote;
 
-    //when the user press Add Quotes
+    //when the user press button "Add Quotes"
     const submitQuote = e => {
         e.preventDefault(); //para prevenir la accion por default
         
+
         //validate
+        if (pet.trim() === '' || owner.trim() === '' || date.trim() === '' || hour.trim() === '' ||
+            symptoms.trim() === '' ) {
+            updateError(true);
+            return; //para que no continue ejecutando el codigo 
+        }
+
 
         //assign an id
 
         //create a list
-        
+
         //restart the form
     }
 
   return (
     <Fragment>
       <h2>Create quote</h2>
-        
+       
+      { error ? <p className="alert-error">All the fields are mandatory</p>     
+        : null }
+
       <form 
         onSubmit = {submitQuote}    
       >
