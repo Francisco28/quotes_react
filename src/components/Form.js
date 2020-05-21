@@ -22,12 +22,26 @@ const Form = () => {
     //extract the values
     const { pet, owner, date, hour, symptoms } = quote;
 
+    //when the user press Add Quotes
+    const submitQuote = e => {
+        e.preventDefault(); //para prevenir la accion por default
+        
+        //validate
+
+        //assign an id
+
+        //create a list
+        
+        //restart the form
+    }
 
   return (
     <Fragment>
       <h2>Create quote</h2>
-
-      <form>
+        
+      <form 
+        onSubmit = {submitQuote}    
+      >
         <label>Pet's name</label>
         <input
           type="text"
