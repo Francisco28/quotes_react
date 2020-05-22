@@ -1,5 +1,6 @@
 import React, { Fragment, useState } from "react";
 import Form from './components/Form';
+import Quote from "./components/Quote";
 
 
 
@@ -28,7 +29,13 @@ function App() {
               />
           </div>
           <div className="one-half column">
-              2   
+              <h2>Manage your appointments</h2>   
+              {quotes.map(quote => (
+                <Quote 
+                  key = {quote.id}
+                  quote = {quote}
+                />
+              ))}
           </div>
         </div>
       </div>
