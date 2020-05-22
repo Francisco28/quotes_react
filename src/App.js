@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import Form from './components/Form';
 import Quote from "./components/Quote";
 
@@ -6,8 +6,24 @@ import Quote from "./components/Quote";
 
 function App() {
 
+  
+  //Quotes on local storage
+  let initialQuotes = JSON.parse(localStorage.getItem('quotes'));
+  if(!initialQuotes) { 
+    initialQuotes = [];
+  }
+
   //array of quotes
-  const [quotes, saveQuotes] = useState([]);
+  const [quotes, saveQuotes] = useState([initialQuotes]);
+
+  //"use Effect" for make various operations when the "state" change
+  useEffect( () => {
+    if(initialQuotes) {  
+      localStorage.setItem('quotes', JSON.stringify(quotes))
+    } else {
+      localStorage.setItem('quotes', JSON.stringify([]))
+    }
+  }, [quotes]);
 
   //function que tome las citas acutales y agregue la nueva
   const createQuote = quote => {
