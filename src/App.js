@@ -23,6 +23,10 @@ function App() {
       saveQuotes(newQuotes);
   }
 
+  //message conditional
+  const title = quotes.length === 0 ? 'There are not quotes' : 'Manage your appointments';
+
+
   return (
     <Fragment>
       <h1>Patient Manager</h1>
@@ -35,7 +39,7 @@ function App() {
               />
           </div>
           <div className="one-half column">
-              <h2>Manage your appointments</h2>   
+              <h2>{title}</h2>   
               {quotes.map(quote => (
                 <Quote 
                   key = {quote.id}
