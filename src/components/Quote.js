@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const Quote = ({quote, deleteQuote}) => (
     <div className="cita">
@@ -14,5 +15,11 @@ const Quote = ({quote, deleteQuote}) => (
         >Delete &times;</button>
     </div>
 );
- 
+
+//documenting with "PropTypes"
+Quote.propTypes = {
+    quote: PropTypes.object.isRequired,
+    deleteQuote: PropTypes.func.isRequired
+}
+
 export default Quote;

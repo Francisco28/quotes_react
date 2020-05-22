@@ -14,14 +14,16 @@ function App() {
   }
 
   //array of quotes
-  const [quotes, saveQuotes] = useState([initialQuotes]);
+  const [quotes, saveQuotes] = useState(initialQuotes);
 
   //"use Effect" for make various operations when the "state" change
   useEffect( () => {
+    let initialQuotes = JSON.parse(localStorage.getItem('quotes'));
+
     if(initialQuotes) {  
       localStorage.setItem('quotes', JSON.stringify(quotes))
     } else {
-      localStorage.setItem('quotes', JSON.stringify([]))
+      localStorage.setItem('quotes', JSON.stringify([]));
     }
   }, [quotes]);
 
