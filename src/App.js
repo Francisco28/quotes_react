@@ -17,6 +17,12 @@ function App() {
     ])
   }
 
+  //function that removes an quote by its "id"
+  const deleteQuote = id => {
+      const newQuotes = quotes.filter(quote => quote.id !== id);
+      saveQuotes(newQuotes);
+  }
+
   return (
     <Fragment>
       <h1>Patient Manager</h1>
@@ -34,6 +40,7 @@ function App() {
                 <Quote 
                   key = {quote.id}
                   quote = {quote}
+                  deleteQuote = {deleteQuote}
                 />
               ))}
           </div>
